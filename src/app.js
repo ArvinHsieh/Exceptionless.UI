@@ -42,7 +42,6 @@
     'exceptionless.refresh',
     'exceptionless.release-notification',
     'exceptionless.search-filter',
-    'exceptionless.signalr',
     'exceptionless.stack',
     'exceptionless.stacks',
     'exceptionless.state',
@@ -52,6 +51,7 @@
     'exceptionless.ui-shift',
     'exceptionless.ui-toggle-class',
     'exceptionless.user',
+    'exceptionless.websocket',
     'app.account',
     'app.admin',
     'app.auth',
@@ -64,7 +64,7 @@
     'app.stack',
     'app.status'
   ])
-  .config(function ($compileProvider, $httpProvider, $locationProvider, $stateProvider, $uiViewScrollProvider, $urlRouterProvider, dialogsProvider, gravatarServiceProvider, RestangularProvider, BASE_URL, EXCEPTIONLESS_API_KEY, $ExceptionlessClient, stripeProvider, STRIPE_PUBLISHABLE_KEY, USE_HTML5_MODE) {
+  .config(function ($compileProvider, $httpProvider, $locationProvider, $stateProvider, $uiViewScrollProvider, $urlRouterProvider, dialogsProvider, gravatarServiceProvider, RestangularProvider, BASE_URL, EXCEPTIONLESS_API_KEY, EXCEPTIONLESS_SERVER_URL, $ExceptionlessClient, stripeProvider, STRIPE_PUBLISHABLE_KEY, USE_HTML5_MODE) {
     function setRouteFilter(filterService, organizationId, projectId, type) {
       filterService.setOrganizationId(organizationId, true);
       filterService.setProjectId(projectId, true);
@@ -77,7 +77,7 @@
     if (EXCEPTIONLESS_API_KEY) {
       var config = $ExceptionlessClient.config;
       config.apiKey = EXCEPTIONLESS_API_KEY;
-      config.serverUrl = BASE_URL;
+      config.serverUrl = EXCEPTIONLESS_SERVER_URL || BASE_URL;
       config.defaultTags.push('UI');
       config.setVersion('@@version');
       config.useReferenceIds();
